@@ -39,20 +39,10 @@ func binarySearch(arr []int, element int) int {
 			return middle
 		} else if eval > 0 {
 			// arr[max/2] > element, so go lower in array
-			max = middle
-			// If at bottom of array and can't find
-			if max == min {
-				found = false
-				return -1
-			}
+			max = middle - 1
 		} else {
 			// arr[max/2] < element, so go higher in array
-			min = middle
-			// If at top of array and can't find
-			if max == min+1 {
-				found = false
-				return -1
-			}
+			min = middle + 1
 		}
 		//fmt.Printf("%d %d %d\n", min, max, middle)
 	}
