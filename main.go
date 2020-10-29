@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"math"
 )
 
 // Maybe sort 'comparable' objects instead?
@@ -47,4 +48,40 @@ func binarySearch(arr []int, element int) int {
 		//fmt.Printf("%d %d %d\n", min, max, middle)
 	}
 	return -1
+}
+
+func expoSearch(arr []int, element int) int {
+	//return the first index if it's the target element
+	if arr[0] == element {
+		return 0;
+	}
+	
+	i := 1
+	for i < len(arr) && arr[i] <= x {
+		i = i*2
+	}
+
+	min := i/2
+	//ensure that i <= len(arr)
+	max := math.Min(i, len(arr))
+
+	found := false
+	for !found {
+		middle := ((max - min) / 2) + min
+		eval := arr[middle] - element
+		if eval == 0 {
+			// Found element
+			found = true
+			return middle
+		} else if eval > 0 {
+			// arr[max/2] > element, so go lower in array
+			max = middle - 1
+		} else {
+			// arr[max/2] < element, so go higher in array
+			min = middle + 1
+		}
+		//fmt.Printf("%d %d %d\n", min, max, middle)
+	}
+	return -1
+
 }
