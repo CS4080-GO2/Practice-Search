@@ -1,0 +1,6 @@
+Output after running 'go run main.go':
+    Array is sorted?: true
+    Binary Search:
+    worked?: true. Took: 6 ms
+    Exponential Search:
+    worked?: true. Took: 7 ms
