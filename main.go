@@ -14,37 +14,37 @@ func main() {
 	start := time.Now()
 	result := fullTest(test)
 	end := time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 
 	fmt.Print("Binary Search Non-Existant Max+1:\n")
 	start = time.Now()
 	result = (binarySearch(test, test[len(test)-1]+1, 0, len(test)-1) == -1)
 	end = time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 
 	fmt.Print("Binary Search Non-Existant Min-1:\n")
 	start = time.Now()
 	result = (binarySearch(test, test[0]-1, 0, len(test)-1) == -1)
 	end = time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 
-	fmt.Print("Exponential Search:\n")
+	fmt.Print("\nExponential Search:\n")
 	start = time.Now()
 	result = fullExpoTest(test)
 	end = time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 
 	fmt.Print("Exponential Search Non-Existant Max+1:\n")
 	start = time.Now()
 	result = (expoSearch(test, test[len(test)-1]+1) == -1)
 	end = time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 
 	fmt.Print("Exponential Search Non-Existant Min-1:\n")
 	start = time.Now()
 	result = (expoSearch(test, test[0]-1) == -1)
 	end = time.Now()
-	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond() - start.Nanosecond())/1000000)
 }
 
 func generateRandomSortedArray(size int) []int {
