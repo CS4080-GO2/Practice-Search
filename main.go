@@ -7,21 +7,44 @@ import (
 )
 
 func main() {
-	test := generateRandomSortedArray(100000)
+	test := generateRandomSortedArray(1000000)
 	fmt.Printf("Array is sorted?: %v\n", verify(test))
 
 	fmt.Print("Binary Search:\n")
 	start := time.Now()
 	result := fullTest(test)
 	end := time.Now()
-	fmt.Printf("worked?: %v. Took: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+
+	fmt.Print("Binary Search Non-Existant Max+1:\n")
+	start = time.Now()
+	result = (binarySearch(test, test[len(test)-1]+1, 0, len(test)-1) == -1)
+	end = time.Now()
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+
+	fmt.Print("Binary Search Non-Existant Min-1:\n")
+	start = time.Now()
+	result = (binarySearch(test, test[0]-1, 0, len(test)-1) == -1)
+	end = time.Now()
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
 
 	fmt.Print("Exponential Search:\n")
-
-	newStart := time.Now()
+	start = time.Now()
 	result = fullExpoTest(test)
-	newEnd := time.Now()
-	fmt.Printf("worked?: %v. Took: %d ms", result, (newEnd.Nanosecond()/1000000 - newStart.Nanosecond()/1000000))
+	end = time.Now()
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+
+	fmt.Print("Exponential Search Non-Existant Max+1:\n")
+	start = time.Now()
+	result = (expoSearch(test, test[len(test)-1]+1) == -1)
+	end = time.Now()
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
+
+	fmt.Print("Exponential Search Non-Existant Min-1:\n")
+	start = time.Now()
+	result = (expoSearch(test, test[0]-1) == -1)
+	end = time.Now()
+	fmt.Printf("Worked?: %v.\tTook: %d ms\n", result, (end.Nanosecond()/1000000 - start.Nanosecond()/1000000))
 }
 
 func generateRandomSortedArray(size int) []int {
@@ -49,8 +72,7 @@ func verify(arr []int) bool {
 func fullTest(arr []int) bool {
 	size := len(arr)
 	for i, v := range arr {
-		//fmt.Println(i)
-		if binarySearch(arr, v, 0, size) != i {
+		if binarySearch(arr, v, 0, size-1) != i {
 			return false
 		}
 	}
@@ -76,12 +98,23 @@ func binarySearch(arr []int, element int, min int, max int) int {
 			found = true
 			return middle
 		} else if eval > 0 {
+			if middle == min {
+				// Element is not there
+				found = false
+				return -1
+			}
 			// arr[max/2] > element, so go lower in array
 			max = middle - 1
 		} else {
+			if max == middle {
+				// Element is not there
+				found = false
+				return -1
+			}
 			// arr[max/2] < element, so go higher in array
 			min = middle + 1
 		}
+		//fmt.Printf("%d %d %d\n", min, max, middle)
 	}
 	return -1
 }
@@ -105,5 +138,4 @@ func expoSearch(arr []int, element int) int {
 	}
 
 	return binarySearch(arr, element, min, max)
-
 }

@@ -1,6 +1,14 @@
 Output after running 'go run main.go':
     Array is sorted?: true
     Binary Search:
-    worked?: true. Took: 6 ms
+    Worked?: true.  Took: 73 ms
+    Binary Search Non-Existant Max+1:
+    Worked?: true.  Took: 0 ms
+    Binary Search Non-Existant Min-1:
+    Worked?: true.  Took: 0 ms
     Exponential Search:
-    worked?: true. Took: 7 ms
+    Worked?: true.  Took: 82 ms
+    Exponential Search Non-Existant Max+1:
+    Worked?: true.  Took: 0 ms
+    Exponential Search Non-Existant Min-1:    
+    Worked?: true.  Took: 0 ms
