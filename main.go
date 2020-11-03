@@ -114,7 +114,6 @@ func binarySearch(arr []int, element int, min int, max int) int {
 			// arr[max/2] < element, so go higher in array
 			min = middle + 1
 		}
-		//fmt.Printf("%d %d %d\n", min, max, middle)
 	}
 	return -1
 }
